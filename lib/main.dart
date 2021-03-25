@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:web_apk_news/shared/listItem.dart';
+import 'package:lipsum/lipsum.dart' as lipsum;
 
 void main() {
   runApp(MyApp());
@@ -21,6 +23,38 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  List<ListItem> listTile = [
+    ListItem("https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
+       lipsum.createWord(numWords: 6),
+        lipsum.createWord(numWords: 2),
+        "28 Jan 2020"),
+
+    ListItem("https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
+        lipsum.createWord(numWords: 6),
+        lipsum.createWord(numWords: 2),
+        "28 Jan 2020"),
+
+    ListItem("https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
+        lipsum.createWord(numWords: 6),
+        lipsum.createWord(numWords: 2),
+        "28 Jan 2020"),
+
+    ListItem("https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
+        lipsum.createWord(numWords: 6),
+        lipsum.createWord(numWords: 2),
+        "28 Jan 2020"),
+
+    ListItem("https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
+        lipsum.createWord(numWords: 6),
+        lipsum.createWord(numWords: 2),
+        "28 Jan 2020"),
+
+    ListItem("https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
+        lipsum.createWord(numWords: 6),
+        lipsum.createWord(numWords: 2),
+        "28 Jan 2020"),
+  ];
+
   List<Tab> _tabList = [
     Tab(
       child: Text("Portada"),
@@ -90,34 +124,30 @@ class _HomePageState extends State<HomePage>
         controller: _tabController,
         children: [
           Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
-              ),
-          ),
-          Padding(
             padding: EdgeInsets.all(8.0),
             child: Container(
+              child: ListView(),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Container(
-            ),
+            child: Container(),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Container(
-            ),
+            child: Container(),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Container(
-            ),
+            child: Container(),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Container(
-            ),
+            child: Container(),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(),
           ),
         ],
       ),
