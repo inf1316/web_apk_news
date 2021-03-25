@@ -7,62 +7,37 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Perlavisión Noticias', home: new HomeScreen());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Perlavisión Noticias',
+        home: HomePage());
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(65.00),
-        child: AppBar(
-          title: Text('Perlavisión'),
-          backgroundColor: Colors.blue,
-          leadingWidth: 38,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu),
+        ),
+        backgroundColor: Color(0xFFFAFAFA),
+        centerTitle: true,
+        title: Text(
+          "Noticias Perlavisión",
+          style: TextStyle(
+            color: Colors.black
+          ),
         ),
       ),
-      body: Center(
-          child: Center(
-        child: Text('Mi contenido'),
-      )),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {},
-      ),
-      drawer: Drawer(
-        child: new ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text("Telecentro Perlavisión"),
-              accountEmail: Text("perlavision@gmail.com"),
-              currentAccountPicture:
-                  CircleAvatar(backgroundColor: Colors.white),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              title: Text('Portada'),
-              leading: Icon(Icons.home),
-              onLongPress: () => {print("Presiono")},
-            ),
-            ListTile(
-              title: Text('Notcias'),
-              leading: Icon(Icons.home),
-            ),
-            ListTile(
-              title: Text('Clasificados'),
-              leading: Icon(Icons.home),
-            ),
-            ListTile(
-              title: Text('Cartelera'),
-              leading: Icon(Icons.home),
-            ),
-          ],
-        ),
-      ),
+
     );
   }
 }
