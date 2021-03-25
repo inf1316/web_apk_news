@@ -26,18 +26,18 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.menu),
+          icon: Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
         ),
         backgroundColor: Color(0xFFFAFAFA),
         centerTitle: true,
         title: Text(
-          "Noticias Perlavisión",
-          style: TextStyle(
-            color: Colors.black
-          ),
+          "Noticias",
+          style: TextStyle(color: Colors.blaack),
         ),
       ),
-
     );
   }
 }
