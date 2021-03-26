@@ -25,16 +25,15 @@ class DetailsScreen extends StatelessWidget {
                     tag: '${item.newsTitle}',
                     child: Image.network(item.imgUrl),
                   ),
-                  SizedBox(height: 10.0),
+                  SizedBox(height: 12.0),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Column(
                       children: [
                         Text(item.newsTitle,
                             style: TextStyle(
-                                fontSize: 22.0, fontWeight: FontWeight.w500)),
-                        SizedBox(
-                          height: 10.0,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w500)
                         ),
                         Row(
                           children: [
@@ -65,13 +64,13 @@ class DetailsScreen extends StatelessWidget {
                               width: 4.0,
                             ),
                             Text(
-                              item.date,
+                              "100",
                               style: TextStyle(fontSize: 12.0),
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 20.0,
+                          height: 16.0,
                         ),
                         Text(
                           lipsum.createParagraph(numParagraphs: 3),

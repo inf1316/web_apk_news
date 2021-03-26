@@ -16,7 +16,8 @@ Widget listWidget(ListItem item) {
               height: 80.0,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(item.imgUrl), fit: BoxFit.cover),
+                      image: NetworkImage(item.imgUrl),
+                      fit: BoxFit.cover),
                   borderRadius: BorderRadius.circular(8.0)),
             ),
           ),

@@ -26,6 +26,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  String _barTitle;
+
   List<ListItem> listTile = [
     ListItem(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
@@ -59,33 +61,44 @@ class _HomePageState extends State<HomePage>
         "28 Jan 2020"),
   ];
 
-  List<Tab> _tabList = [
-    Tab(
-      child: Text("Portada"),
+  List<CustomTab> _tabList = [
+    CustomTab(
+      title: "Portada",
     ),
-    Tab(
-      child: Text("Noticias"),
+    CustomTab(
+      title: "Noticias",
     ),
-    Tab(
-      child: Text("Promociones"),
+    CustomTab(
+      title: "Promociones",
     ),
-    Tab(
-      child: Text("Cartelera"),
+    CustomTab(
+      title: "Cartelera",
     ),
-    Tab(
-      child: Text("Pronosticos"),
+    CustomTab(
+      title: "Pronosticos",
     ),
-    Tab(
-      child: Text("Perdidas-Hallazgo"),
+    CustomTab(
+      title: "Perdidas-Hallazgo",
     ),
   ];
 
   TabController _tabController;
+  CustomTab _myHandler;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _tabController = TabController(length: _tabList.length, vsync: this);
+    _myHandler = _tabList[0];
+
+    // See more: https://stackoverflow.com/questions/46891916/flutter-change-main-appbar-title-on-other-pages
+    _tabController.addListener(_handleSelected);
+  }
+
+  void _handleSelected() {
+    setState(() {
+      _myHandler = _tabList[_tabController.index];
+    });
   }
 
   @override
@@ -110,7 +123,7 @@ class _HomePageState extends State<HomePage>
         backgroundColor: Color(0xFFFAFAFA),
         centerTitle: true,
         title: Text(
-          "Noticias",
+          _myHandler.title,
           style: TextStyle(color: Colors.black),
         ),
         bottom: PreferredSize(
@@ -149,8 +162,25 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Container(),
+            padding: EdgeInsets.all(10.0),
+            child: Container(
+              width: 100,
+              child: ListView.builder(
+                itemCount: _tabList.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailsScreen(
+                                    item: listTile[index],
+                                    tag: listTile[index].newsTitle)));
+                      },
+                      child: listWidget(listTile[index]));
+                },
+              ),
+            ),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -172,4 +202,9 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
+}
+
+class CustomTab extends Tab {
+  final String title;
+  CustomTab({this.title}) : super(child: Text(title));
 }
