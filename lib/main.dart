@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_apk_news/detail.dart';
 import 'package:web_apk_news/shared/listItem.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
 
@@ -25,7 +26,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-
   List<ListItem> listTile = [
     ListItem(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
@@ -128,15 +128,22 @@ class _HomePageState extends State<HomePage>
         controller: _tabController,
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(10.0),
             child: Container(
+              width: 100,
               child: ListView.builder(
                 itemCount: _tabList.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {},
-                    child: listWidget(listTile[index])
-                  );
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailsScreen(
+                                    item: listTile[index],
+                                    tag: listTile[index].newsTitle)));
+                      },
+                      child: listWidget(listTile[index]));
                 },
               ),
             ),

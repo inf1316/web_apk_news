@@ -9,16 +9,19 @@ Widget listWidget(ListItem item) {
       padding: EdgeInsets.all(10.0),
       child: Row(
         children: [
-          Container(
-            width: 80.0,
-            height: 80.0,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(item.imgUrl), fit: BoxFit.cover),
-                borderRadius: BorderRadius.circular(8.0)),
+          Hero(
+            tag: '${item.newsTitle}',
+            child: Container(
+              width: 90.0,
+              height: 80.0,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(item.imgUrl), fit: BoxFit.cover),
+                  borderRadius: BorderRadius.circular(8.0)),
+            ),
           ),
           SizedBox(
-            width: 7.0,
+            width: 10.0,
           ),
           Expanded(
               child: Column(
@@ -30,25 +33,23 @@ Widget listWidget(ListItem item) {
                 style: TextStyle(fontSize: 18.00),
               ),
               SizedBox(
-                height: 5.0,
+                height: 10.0,
               ),
-              Row(
-                children: [
-                  Icon(Icons.person),
-                  Text(
-                    item.author,
-                    style: TextStyle(fontSize: 12.0),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Icon(Icons.date_range),
-                  Text(
-                    item.date,
-                    style: TextStyle(fontSize: 12.0),
-                  ),
-                ],
-              )
+              Row(children: [
+                Icon(Icons.person),
+                Text(
+                  item.author,
+                  style: TextStyle(fontSize: 12.0),
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Icon(Icons.date_range),
+                Text(
+                  item.date,
+                  style: TextStyle(fontSize: 12.0),
+                )
+              ])
             ],
           ))
         ],
