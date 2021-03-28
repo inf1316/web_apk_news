@@ -3,6 +3,7 @@ import 'package:web_apk_news/detail.dart';
 import 'package:web_apk_news/shared/listItem.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
 
+import 'imageSlidersWidget.dart';
 import 'listWidget.dart';
 
 void main() {
@@ -26,8 +27,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  String _barTitle;
-
   List<ListItem> listTile = [
     ListItem(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
@@ -69,7 +68,7 @@ class _HomePageState extends State<HomePage>
       title: "Noticias",
     ),
     CustomTab(
-      title: "Promociones",
+      title: "Galería Imagenes",
     ),
     CustomTab(
       title: "Cartelera",
@@ -183,8 +182,66 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Container(),
+            padding: EdgeInsets.all(5.0),
+            child: Container(
+              width: 100,
+              child: new ListView.builder(
+                  itemCount: 7,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: new Padding(
+                        padding: new EdgeInsets.symmetric(
+                            vertical: 12.0, horizontal: 12.0),
+                        child: Card(
+                            elevation: 8.0,
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(16.0),
+                            ),
+                            child: new Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                new ClipRRect(
+                                  child: new ImageSliders(),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: new Radius.circular(16.0),
+                                      topRight: new Radius.circular(16.0)),
+                                ),
+                                new Padding(
+                                  padding: new EdgeInsets.all(16.0),
+                                  child: new Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      new Text(
+                                        "This is title Text".toUpperCase(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6,
+                                      ),
+                                      new SizedBox(
+                                        height: 16.0,
+                                      ),
+                                      new Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          new Text("19 March 2021"),
+                                          new Text("10 min"),
+                                          new Text("125k views")
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
+                    );
+                  }),
+            ),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
