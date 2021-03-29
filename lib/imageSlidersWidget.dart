@@ -2,10 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'ImageScreenWidget.dart';
+
 class ImageSliders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final List<String> imgList = [
       'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
       'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
@@ -23,7 +24,17 @@ class ImageSliders extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     child: Stack(
                       children: <Widget>[
-                        Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                        InkResponse(
+                            onTap: () {
+                              Navigator.push<Widget>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImageScreen(item),
+                                ),
+                              );
+                            },
+                            child: Image.network(item,
+                                fit: BoxFit.cover, width: 1000.0)),
                         Positioned(
                           bottom: 0.0,
                           left: 0.0,
@@ -56,7 +67,6 @@ class ImageSliders extends StatelessWidget {
           scrollDirection: Axis.vertical,
           autoPlay: true,
         ),
-        items: imageSliders
-    );
+        items: imageSliders);
   }
 }
