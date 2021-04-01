@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:web_apk_news/shared/imageCard.dart';
 import 'imageSlidersWidget.dart';
 
+// to show a card image
 class ImageCard extends StatelessWidget {
   final ImageListCard imageListCard;
 

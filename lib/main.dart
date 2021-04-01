@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:web_apk_news/imageCardWidget.dart';
+import 'package:web_apk_news/jobOffersWidget.dart';
 import 'package:web_apk_news/shared/imageCard.dart';
+import 'package:web_apk_news/shared/jobOffer.dart';
 import 'listWidget.dart';
 import 'package:web_apk_news/detailWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
@@ -210,40 +212,12 @@ class _HomePageState extends State<HomePage>
                 child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            const ListTile(
-                              leading: Icon(Icons.visibility),
-                              title: Text(
-                                'Universidad de Cienfuegos',
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                              subtitle: Text(
-                                "Ofrece plaza de custudio, salario minimo, persona en excelente condicon fisica",
-                                style: TextStyle(fontSize: 15.0),
-                              ),
-                            ),
-                            SizedBox(height: 12),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: 70.0,
-                                ),
-                                Icon(Icons.phone),
-                                Text(
-                                  "+595 (0982472329)",
-                                  style: TextStyle(fontSize: 15.0),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      );
+                      return JobOffers(
+                          jobOffer: JobOffer(
+                              "Universidad de Cienfuegos",
+                              "Ofrece plaza de custudio, salario minimo, "
+                                  "persona en excelente condicon fisica",
+                              "+595 (0982472329)"));
                     })),
           ),
           Padding(
