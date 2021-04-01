@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'ImageScreenWidget.dart';
+import 'imageFullScreenWidget.dart';
 
 class ImageSliders extends StatelessWidget {
   @override
@@ -29,7 +29,7 @@ class ImageSliders extends StatelessWidget {
                               Navigator.push<Widget>(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ImageScreen(item),
+                                  builder: (context) => ImageFullScreen(item),
                                 ),
                               );
                             },

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'imageSlidersWidget.dart';
+import 'package:web_apk_news/imageCardWidget.dart';
+import 'package:web_apk_news/shared/imageCard.dart';
 import 'listWidget.dart';
-import 'package:web_apk_news/detail.dart';
+import 'package:web_apk_news/detailWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
 import 'package:web_apk_news/shared/listItem.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
@@ -27,10 +28,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-
   TabController _tabController;
   CustomTab _myHandler;
-  List<CustomTab> _tabList;
+
+  // tab control
+  final List<CustomTab> _tabList = [
+    CustomTab(
+      title: "Portada",
+    ),
+    CustomTab(
+      title: "Noticias",
+    ),
+    CustomTab(
+      title: "Galería Imagenes",
+    ),
+    CustomTab(
+      title: "Ofertas Laborales",
+    ),
+    CustomTab(
+      title: "Cartelera",
+    ),
+    CustomTab(
+      title: "Perdidas-Hallazgo",
+    )
+  ];
 
   // hard code for moment
   List<ListItem> listTile = [
@@ -70,27 +91,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
 
-    _tabList = [
-      CustomTab(
-        title: "Portada",
-      ),
-      CustomTab(
-        title: "Noticias",
-      ),
-      CustomTab(
-        title: "Galería Imagenes",
-      ),
-      CustomTab(
-        title: "Ofertas Laborales",
-      ),
-      CustomTab(
-        title: "Cartelera",
-      ),
-      CustomTab(
-        title: "Perdidas-Hallazgo",
-      )
-    ];
-
     _tabController = TabController(length: _tabList.length, vsync: this);
     _myHandler = _tabList[0];
 
@@ -106,7 +106,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _tabController.dispose();
     super.dispose();
   }
@@ -196,51 +195,10 @@ class _HomePageState extends State<HomePage>
                       child: new Padding(
                         padding: new EdgeInsets.symmetric(
                             vertical: 12.0, horizontal: 12.0),
-                        child: Card(
-                            elevation: 8.0,
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(16.0),
-                            ),
-                            child: new Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                new ClipRRect(
-                                  child: new ImageSliders(),
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: new Radius.circular(16.0),
-                                      topRight: new Radius.circular(16.0)),
-                                ),
-                                new Padding(
-                                  padding: new EdgeInsets.all(16.0),
-                                  child: new Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      new Text(
-                                        "This is title Text".toUpperCase(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6,
-                                      ),
-                                      new SizedBox(
-                                        height: 16.0,
-                                      ),
-                                      new Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          new Text("19 March 2021"),
-                                          new Text("10 min"),
-                                          new Text("125k views")
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            )),
+                        child: ImageCard(
+                          imageListCard: ImageListCard("This title Image",
+                              "19 March 2021", "10 min", "125k views", null),
+                        ),
                       ),
                     );
                   }),

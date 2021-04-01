@@ -2,19 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class ImageScreen extends StatefulWidget {
+// for show image in full screen
+// See more: https://pub.dev/packages/photo_view
+class ImageFullScreen extends StatefulWidget {
   final String url;
-  ImageScreen(this.url);
+  ImageFullScreen(this.url);
 
   @override
-  _MyImageScreen createState() => _MyImageScreen(url);
+  _ImageFullScreen createState() => _ImageFullScreen(url);
 }
 
-// See more: https://pub.dev/packages/photo_view
-class _MyImageScreen extends State<ImageScreen> {
+class _ImageFullScreen extends State<ImageFullScreen> {
   final String url;
 
-  _MyImageScreen(this.url);
+  _ImageFullScreen(this.url);
 
   @override
   Widget build(BuildContext context) {
