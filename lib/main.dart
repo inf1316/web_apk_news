@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:web_apk_news/detail.dart';
-import 'package:web_apk_news/shared/listItem.dart';
-import 'package:lipsum/lipsum.dart' as lipsum;
-
 import 'imageSlidersWidget.dart';
 import 'listWidget.dart';
+import 'package:web_apk_news/detail.dart';
+import 'package:web_apk_news/shared/customTab.dart';
+import 'package:web_apk_news/shared/listItem.dart';
+import 'package:lipsum/lipsum.dart' as lipsum;
 
 void main() {
   runApp(MyApp());
@@ -27,6 +27,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+
+  TabController _tabController;
+  CustomTab _myHandler;
+  List<CustomTab> _tabList;
+
+  // hard code for moment
   List<ListItem> listTile = [
     ListItem(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
@@ -60,33 +66,31 @@ class _HomePageState extends State<HomePage>
         "28 Jan 2020"),
   ];
 
-  List<CustomTab> _tabList = [
-    CustomTab(
-      title: "Portada",
-    ),
-    CustomTab(
-      title: "Noticias",
-    ),
-    CustomTab(
-      title: "Galería Imagenes",
-    ),
-    CustomTab(
-      title: "Cartelera",
-    ),
-    CustomTab(
-      title: "Pronosticos",
-    ),
-    CustomTab(
-      title: "Perdidas-Hallazgo",
-    ),
-  ];
-
-  TabController _tabController;
-  CustomTab _myHandler;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+
+    _tabList = [
+      CustomTab(
+        title: "Portada",
+      ),
+      CustomTab(
+        title: "Noticias",
+      ),
+      CustomTab(
+        title: "Galería Imagenes",
+      ),
+      CustomTab(
+        title: "Ofertas Laborales",
+      ),
+      CustomTab(
+        title: "Cartelera",
+      ),
+      CustomTab(
+        title: "Perdidas-Hallazgo",
+      )
+    ];
+
     _tabController = TabController(length: _tabList.length, vsync: this);
     _myHandler = _tabList[0];
 
@@ -189,7 +193,6 @@ class _HomePageState extends State<HomePage>
                   itemCount: 7,
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: () {},
                       child: new Padding(
                         padding: new EdgeInsets.symmetric(
                             vertical: 12.0, horizontal: 12.0),
@@ -245,7 +248,45 @@ class _HomePageState extends State<HomePage>
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Container(),
+            child: Container(
+                child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            const ListTile(
+                              leading: Icon(Icons.visibility),
+                              title: Text(
+                                'Universidad de Cienfuegos',
+                                style: TextStyle(fontSize: 20.0),
+                              ),
+                              subtitle: Text(
+                                "Ofrece plaza de custudio, salario minimo, persona en excelente condicon fisica",
+                                style: TextStyle(fontSize: 15.0),
+                              ),
+                            ),
+                            SizedBox(height: 12),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 70.0,
+                                ),
+                                Icon(Icons.phone),
+                                Text(
+                                  "+595 (0982472329)",
+                                  style: TextStyle(fontSize: 15.0),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    })),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -259,9 +300,4 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
-}
-
-class CustomTab extends Tab {
-  final String title;
-  CustomTab({this.title}) : super(child: Text(title));
 }
