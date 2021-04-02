@@ -3,6 +3,7 @@ import 'package:web_apk_news/imageCardWidget.dart';
 import 'package:web_apk_news/jobOffersWidget.dart';
 import 'package:web_apk_news/shared/imageCard.dart';
 import 'package:web_apk_news/shared/jobOffer.dart';
+import 'package:weekday_selector/weekday_selector.dart';
 import 'listWidget.dart';
 import 'package:web_apk_news/detailWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
@@ -32,6 +33,8 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   CustomTab _myHandler;
+
+  final values = List.filled(7, false);
 
   // tab control
   final List<CustomTab> _tabList = [
@@ -216,14 +219,73 @@ class _HomePageState extends State<HomePage>
                           jobOffer: JobOffer(
                               "Universidad de Cienfuegos",
                               "Ofrece plaza de custudio, salario minimo, "
-                                  "persona en excelente condicon fisica",
+                                  "persona en excelente condicion fisica,"
+                                  "sin antecedente penal",
                               "+595 (0982472329)"));
                     })),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Container(),
-          ),
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                  child: Column(
+                children: [
+                  // See more: https://pub.dev/packages/weekday_selector
+                  WeekdaySelector(
+                    onChanged: (int day) {
+                      setState(() {
+                        final index = day % 7;
+                        values[index] = !values[index];
+                      });
+                    },
+                    values: values,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                      child: Container(
+                    child: ListView.builder(
+                        itemCount: 30,
+                        itemBuilder: (context, index) {
+                          return Card(
+                              child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Stack(
+                                children: [
+                                  ListTile(
+                                    leading: Text("12:30 PM"),
+                                    title: Text(
+                                      'A buena hora',
+                                      style: TextStyle(fontSize: 22.0),
+                                    ),
+                                    subtitle: Text(
+                                      'Salud de primera mano.',
+                                      style: TextStyle(fontSize: 17.0),
+                                    ),
+                                  ),
+                                  // See more: https://stackoverflow.com/questions/55259142/flutter-how-to-align-widget-to-the-topright-of-column
+                                  Positioned(
+                                    top: 0,
+                                    right: 0,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        
+                                      },
+                                      icon: Icon(
+                                        Icons.add_alert,
+                                        color: Colors.indigo,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ));
+                        }),
+                  )),
+                ],
+              ))),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Container(),

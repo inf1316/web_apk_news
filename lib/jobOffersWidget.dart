@@ -14,7 +14,11 @@ class JobOffers extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           ListTile(
-            leading: Icon(Icons.visibility),
+            leading: Icon(
+              Icons.visibility,
+              color: Colors.black,
+              size: 30,
+            ),
             title: Text(
               jobOffer.title,
               style: TextStyle(fontSize: 20.0),
