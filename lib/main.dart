@@ -10,7 +10,6 @@ import 'package:web_apk_news/shared/customTab.dart';
 import 'package:web_apk_news/shared/listItem.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
 
-
 void main() {
   runApp(MyApp());
 }
@@ -109,14 +108,6 @@ class _HomePageState extends State<HomePage>
   void _handleSelected() {
     setState(() {
       _myHandler = _tabList[_tabController.index];
-
-      // obtain day week
-      if (_myHandler.title == "Cartelera") {
-        var date = DateTime.now();
-        var day = date.weekday;
-        values = List.filled(7, false, growable: false)
-          ..[day == 7 ? 0 : day] = true;
-      }
     });
   }
 
@@ -170,10 +161,9 @@ class _HomePageState extends State<HomePage>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    DetailsScreen(
-                                        item: listTile[index],
-                                        tag: listTile[index].newsTitle)));
+                                builder: (context) => DetailsScreen(
+                                    item: listTile[index],
+                                    tag: listTile[index].newsTitle)));
                       },
                       child: listWidget(listTile[index]));
                 },
@@ -192,10 +182,9 @@ class _HomePageState extends State<HomePage>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    DetailsScreen(
-                                        item: listTile[index],
-                                        tag: listTile[index].newsTitle)));
+                                builder: (context) => DetailsScreen(
+                                    item: listTile[index],
+                                    tag: listTile[index].newsTitle)));
                       },
                       child: listWidget(listTile[index]));
                 },
@@ -222,21 +211,7 @@ class _HomePageState extends State<HomePage>
                   }),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Container(
-                child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return JobOffers(
-                          jobOffer: JobOffer(
-                              "Universidad de Cienfuegos",
-                              "Ofrece plaza de custudio, salario minimo, "
-                                  "persona en excelente condicion fisica,"
-                                  "sin antecedente penal",
-                              "+595 (0982472329)"));
-                    })),
-          ),
+          JobOffers(),
           BillBoard(),
           Padding(
             padding: EdgeInsets.all(8.0),
