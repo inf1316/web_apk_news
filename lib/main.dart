@@ -10,6 +10,7 @@ import 'package:web_apk_news/shared/customTab.dart';
 import 'package:web_apk_news/shared/listItem.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
 
+
 void main() {
   runApp(MyApp());
 }
@@ -34,7 +35,9 @@ class _HomePageState extends State<HomePage>
   TabController _tabController;
   CustomTab _myHandler;
 
-  final values = List.filled(7, false);
+  // weekDay
+  var values = List.filled(7, false);
+  var notification = false;
 
   // tab control
   final List<CustomTab> _tabList = [
@@ -106,6 +109,14 @@ class _HomePageState extends State<HomePage>
   void _handleSelected() {
     setState(() {
       _myHandler = _tabList[_tabController.index];
+
+      // obtain day week
+      if (_myHandler.title == "Cartelera") {
+        var date = DateTime.now();
+        var day = date.weekday;
+        values = List.filled(7, false, growable: false)
+          ..[day == 7 ? 0 : day] = true;
+      }
     });
   }
 
@@ -152,16 +163,17 @@ class _HomePageState extends State<HomePage>
             child: Container(
               width: 100,
               child: ListView.builder(
-                itemCount: _tabList.length,
+                itemCount: listTile.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DetailsScreen(
-                                    item: listTile[index],
-                                    tag: listTile[index].newsTitle)));
+                                builder: (context) =>
+                                    DetailsScreen(
+                                        item: listTile[index],
+                                        tag: listTile[index].newsTitle)));
                       },
                       child: listWidget(listTile[index]));
                 },
@@ -180,9 +192,10 @@ class _HomePageState extends State<HomePage>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DetailsScreen(
-                                    item: listTile[index],
-                                    tag: listTile[index].newsTitle)));
+                                builder: (context) =>
+                                    DetailsScreen(
+                                        item: listTile[index],
+                                        tag: listTile[index].newsTitle)));
                       },
                       child: listWidget(listTile[index]));
                 },
@@ -228,64 +241,66 @@ class _HomePageState extends State<HomePage>
               padding: EdgeInsets.all(8.0),
               child: Container(
                   child: Column(
-                children: [
-                  // See more: https://pub.dev/packages/weekday_selector
-                  WeekdaySelector(
-                    onChanged: (int day) {
-                      setState(() {
-                        final index = day % 7;
-                        values[index] = !values[index];
-                      });
-                    },
-                    values: values,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Expanded(
-                      child: Container(
-                    child: ListView.builder(
-                        itemCount: 30,
-                        itemBuilder: (context, index) {
-                          return Card(
-                              child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Stack(
-                                children: [
-                                  ListTile(
-                                    leading: Text("12:30 PM"),
-                                    title: Text(
-                                      'A buena hora',
-                                      style: TextStyle(fontSize: 22.0),
-                                    ),
-                                    subtitle: Text(
-                                      'Salud de primera mano.',
-                                      style: TextStyle(fontSize: 17.0),
-                                    ),
-                                  ),
-                                  // See more: https://stackoverflow.com/questions/55259142/flutter-how-to-align-widget-to-the-topright-of-column
-                                  Positioned(
-                                    top: 0,
-                                    right: 0,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        
-                                      },
-                                      icon: Icon(
-                                        Icons.add_alert,
-                                        color: Colors.indigo,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ));
-                        }),
-                  )),
-                ],
-              ))),
+                    children: [
+                      // See more: https://pub.dev/packages/weekday_selector
+                      WeekdaySelector(
+                          onChanged: (int day) {
+                            setState(() {
+                              values = List.filled(7, false, growable: false)
+                                ..[day == 7 ? 0 : day] = true;
+                            });
+                          },
+                          selectedFillColor: Colors.indigo,
+                          values: values,
+                          shortWeekdays: ["D", "L", "M", "M", "J", "V", "S"]),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Expanded(
+                          child: Container(
+                            child: ListView.builder(
+                                itemCount: 30,
+                                itemBuilder: (context, index) {
+                                  return Card(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              ListTile(
+                                                leading: Text("12:30 PM"),
+                                                title: Text(
+                                                  'A buena hora',
+                                                  style: TextStyle(
+                                                      fontSize: 22.0),
+                                                ),
+                                                subtitle: Text(
+                                                  'Salud de primera mano.',
+                                                  style: TextStyle(
+                                                      fontSize: 17.0),
+                                                ),
+                                              ),
+                                              // See more: https://stackoverflow.com/questions/55259142/flutter-how-to-align-widget-to-the-topright-of-column
+                                              Positioned(
+                                                top: 0,
+                                                right: 0,
+                                                child: IconButton(
+                                                  onPressed: () {
+
+                                                  },
+                                                  icon: Icon(Icons.add_alert,
+                                                      color: Colors.indigo
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ));
+                                }),
+                          )),
+                    ],
+                  ))),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Container(),
