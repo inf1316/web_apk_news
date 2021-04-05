@@ -2,10 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:web_apk_news/shared/jobOffer.dart';
 
+
+
+
 class JobOffers extends StatelessWidget {
   final JobOffer jobOffer;
 
   JobOffers({Key key, @required this.jobOffer}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
