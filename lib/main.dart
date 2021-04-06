@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:web_apk_news/imageCardWidget.dart';
 import 'package:web_apk_news/jobOffersWidget.dart';
+import 'package:web_apk_news/service/clientTokenService.dart';
 import 'package:web_apk_news/shared/imageCard.dart';
 import 'package:web_apk_news/shared/jobOffer.dart';
 import 'billboardWidget.dart';
@@ -37,6 +38,8 @@ class _HomePageState extends State<HomePage>
   // weekDay
   var values = List.filled(7, false);
   var notification = false;
+
+  ClientTokenService api = ClientTokenService();
 
   // tab control
   final List<CustomTab> _tabList = [
@@ -103,6 +106,9 @@ class _HomePageState extends State<HomePage>
 
     // See more: https://stackoverflow.com/questions/46891916/flutter-change-main-appbar-title-on-other-pages
     _tabController.addListener(_handleSelected);
+
+    api.getToken();
+
   }
 
   void _handleSelected() {
