@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web_apk_news/service/jobOffersApiService.dart';
+import 'package:web_apk_news/shared/jobOffer.dart';
 
 class JobOffers extends StatefulWidget {
   const JobOffers({Key key}) : super(key: key);
@@ -9,6 +11,8 @@ class JobOffers extends StatefulWidget {
 }
 
 class _JobOffersState extends State<JobOffers> {
+  final JobOffersApiService apiService = JobOffersApiService();
+
   @override
   void initState() {
     super.initState();
@@ -18,52 +22,62 @@ class _JobOffersState extends State<JobOffers> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8.0),
-      child: Container(
-        child: ListView.builder(
-            itemCount: 30,
-            itemBuilder: (context, index) {
-              return Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    ListTile(
-                      leading: Icon(
-                        Icons.visibility,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      title: Text(
-                        "Universidad de Cienfuegos",
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                      subtitle: Text(
-                        "Ofrece plaza de custudio, salario minimo "
-                        "persona en excelente condicion fisica,"
-                        "sin antecedente penal",
-                        style: TextStyle(fontSize: 15.0),
-                      ),
-                    ),
-                    SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 70.0,
-                        ),
-                        Icon(Icons.phone),
-                        Text(
-                          "+595 (0982472329)",
-                          style: TextStyle(fontSize: 15.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+      child: FutureBuilder(
+          future: apiService.getAll(),
+          builder: (context, AsyncSnapshot<List<JobOffer>> snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Error ...."),
               );
-            }),
-      ),
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              List<JobOffer> jobOffer = snapshot.data;
+              return ListView.builder(
+                  itemCount: jobOffer.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Icon(
+                              Icons.visibility,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            title: Text(
+                              jobOffer[index].title,
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                            subtitle: Text(
+                              jobOffer[index].subTitle,
+                              style: TextStyle(fontSize: 15.0),
+                            ),
+                          ),
+                          SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 70.0,
+                              ),
+                              Icon(Icons.phone),
+                              Text(
+                                jobOffer[index].phone,
+                                style: TextStyle(fontSize: 15.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  });
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
     );
   }
 }

@@ -1,17 +1,17 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:web_apk_news/constant/constants.dart';
 
-// See more HTTPS in Localhost : https://gist.github.com/adnan360/ad2b1cfc44114ac6f91fbb668c76798d
-class ClientTokenService {
+// See more (HTTPS in Localhost) : https://gist.github.com/adnan360/ad2b1cfc44114ac6f91fbb668c76798d
+class ClientTokenApiService {
   Future<String> getToken() async {
     Dio _dio = new Dio();
 
     try {
       var params = {"username": "manuel", "password": "admin"};
 
-
+      // See more: https://pub.dev/packages/dio - Https certificate verification
       (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
           (HttpClient client) {
         client.badCertificateCallback =
@@ -19,8 +19,7 @@ class ClientTokenService {
         return client;
       };
 
-      Response response = await _dio.post(
-          "https://10.0.2.2/yii2/Actuales/perlavision/web-service-news/web/login/login",
+      Response response = await _dio.post('$URL_API/login/login',
           data: params,
           options: Options(headers: {
             HttpHeaders.contentTypeHeader: "application/json",
