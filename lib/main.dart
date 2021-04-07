@@ -1,15 +1,19 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:web_apk_news/imageCardWidget.dart';
-import 'package:web_apk_news/jobOffersWidget.dart';
+import 'package:web_apk_news/pages/jobOffersWidget.dart';
+import 'package:web_apk_news/pages/newsWidget.dart';
 import 'package:web_apk_news/shared/imageCard.dart';
-import 'billboardWidget.dart';
-import 'listWidget.dart';
-import 'package:web_apk_news/detailWidget.dart';
+import 'custom/customHttpOverrides.dart';
+import 'pages/billboardWidget.dart';
+import 'pages/newsListWidget.dart';
+import 'file:///D:/www/yii2/Actuales/perlavision/web-apk-news/web_apk_news/lib/pages/newsDetailsWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
-import 'package:web_apk_news/shared/listItem.dart';
+import 'package:web_apk_news/shared/newsList.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
 
 void main() {
+  HttpOverrides.global = new CustomHttpOverrides();
   runApp(MyApp());
 }
 
@@ -56,37 +60,43 @@ class _HomePageState extends State<HomePage>
   ];
 
   // hard code for moment
-  List<ListItem> listTile = [
-    ListItem(
+  List<NewsList> listTile = [
+    NewsList(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
         lipsum.createWord(numWords: 6),
         lipsum.createWord(numWords: 2),
-        "28 Jan 2020"),
-    ListItem(
+        "28 Jan 2020",
+        ""),
+    NewsList(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
         lipsum.createWord(numWords: 6),
         lipsum.createWord(numWords: 2),
-        "28 Jan 2020"),
-    ListItem(
+        "28 Jan 2020",
+        ""),
+    NewsList(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
         lipsum.createWord(numWords: 6),
         lipsum.createWord(numWords: 2),
-        "28 Jan 2020"),
-    ListItem(
+        "28 Jan 2020",
+        ""),
+    NewsList(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
         lipsum.createWord(numWords: 6),
         lipsum.createWord(numWords: 2),
-        "28 Jan 2020"),
-    ListItem(
+        "28 Jan 2020",
+        ""),
+    NewsList(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
         lipsum.createWord(numWords: 6),
         lipsum.createWord(numWords: 2),
-        "28 Jan 2020"),
-    ListItem(
+        "28 Jan 2020",
+        ""),
+    NewsList(
         "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
         lipsum.createWord(numWords: 6),
         lipsum.createWord(numWords: 2),
-        "28 Jan 2020"),
+        "28 Jan 2020",
+        ""),
   ];
 
   @override
@@ -144,27 +154,7 @@ class _HomePageState extends State<HomePage>
       body: TabBarView(
         controller: _tabController,
         children: [
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Container(
-              width: 100,
-              child: ListView.builder(
-                itemCount: listTile.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailsScreen(
-                                    item: listTile[index],
-                                    tag: listTile[index].newsTitle)));
-                      },
-                      child: listWidget(listTile[index]));
-                },
-              ),
-            ),
-          ),
+          News(),
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Container(
@@ -177,7 +167,7 @@ class _HomePageState extends State<HomePage>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DetailsScreen(
+                                builder: (context) => NewsDetailsScreen(
                                     item: listTile[index],
                                     tag: listTile[index].newsTitle)));
                       },

@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:web_apk_news/shared/listItem.dart';
-import 'package:lipsum/lipsum.dart' as lipsum;
+import 'package:web_apk_news/shared/newsList.dart';
 
-class DetailsScreen extends StatelessWidget {
+class NewsDetailsScreen extends StatelessWidget {
   final String tag;
-  final ListItem item;
+  final NewsList item;
 
-  DetailsScreen({Key key, @required this.item, @required this.tag})
+  NewsDetailsScreen({Key key, @required this.item, @required this.tag})
       : super(key: key);
 
   @override
@@ -73,7 +72,7 @@ class DetailsScreen extends StatelessWidget {
                           height: 16.0,
                         ),
                         Text(
-                          lipsum.createParagraph(numParagraphs: 3),
+                          item.content,
                           style: TextStyle(fontSize: 18.0),
                         )
                       ],

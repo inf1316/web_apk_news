@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'shared/listItem.dart';
+import '../shared/newsList.dart';
 
-Widget listWidget(ListItem item) {
+Widget listWidget(NewsList item) {
   return Card(
     elevation: 2.0,
     margin: EdgeInsets.only(bottom: 2.0),
@@ -12,8 +12,8 @@ Widget listWidget(ListItem item) {
           Hero(
             tag: '${item.newsTitle}',
             child: Container(
-              width: 90.0,
-              height: 80.0,
+              width: 103.0,
+              height: 110.0,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(item.imgUrl),
@@ -37,13 +37,23 @@ Widget listWidget(ListItem item) {
                 height: 10.0,
               ),
               Row(children: [
-                Icon(Icons.person),
+                CircleAvatar(
+                  backgroundColor: Color(0xffE6E6E6),
+                  radius: 13,
+                  child: CircleAvatar(
+                    radius: 12,
+                    backgroundImage: NetworkImage("https://media-exp1.licdn.com/dms/image/C5603AQFj1aS63EknAA/profile-displayphoto-shrink_100_100/0/1552509106281?e=1623283200&v=beta&t=2iHLO2Jp28rfUsoJRuBpZI9GdZRXiqIljXf7TWD2eyQ"),
+                  )
+                ),
+                SizedBox(
+                  width: 5.0,
+                ),
                 Text(
                   item.author,
                   style: TextStyle(fontSize: 12.0),
                 ),
                 SizedBox(
-                  width: 10.0,
+                  width: 12.0,
                 ),
                 Icon(Icons.date_range),
                 Text(

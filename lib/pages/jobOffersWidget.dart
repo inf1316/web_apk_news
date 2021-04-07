@@ -27,8 +27,7 @@ class _JobOffersState extends State<JobOffers> {
           builder: (context, AsyncSnapshot<List<JobOffer>> snapshot) {
             if (snapshot.hasError) {
               return Center(
-                child: Text("Error ...."),
-              );
+                  child: Column(children: [Icon(Icons.error, size: 120)]));
             } else if (snapshot.connectionState == ConnectionState.done) {
               List<JobOffer> jobOffer = snapshot.data;
               return ListView.builder(
