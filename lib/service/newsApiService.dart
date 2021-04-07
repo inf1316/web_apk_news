@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:web_apk_news/models/newsModel.dart';
 import 'package:web_apk_news/shared/newsList.dart';

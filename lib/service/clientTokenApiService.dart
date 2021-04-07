@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:web_apk_news/constant/constants.dart';
 

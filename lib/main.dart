@@ -155,27 +155,7 @@ class _HomePageState extends State<HomePage>
         controller: _tabController,
         children: [
           News(),
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Container(
-              width: 100,
-              child: ListView.builder(
-                itemCount: _tabList.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NewsDetailsScreen(
-                                    item: listTile[index],
-                                    tag: listTile[index].newsTitle)));
-                      },
-                      child: listWidget(listTile[index]));
-                },
-              ),
-            ),
-          ),
+          News(),
           Padding(
             padding: EdgeInsets.all(5.0),
             child: Container(
