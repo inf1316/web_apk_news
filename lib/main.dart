@@ -6,8 +6,6 @@ import 'package:web_apk_news/pages/newsWidget.dart';
 import 'package:web_apk_news/shared/imageCard.dart';
 import 'custom/customHttpOverrides.dart';
 import 'pages/billboardWidget.dart';
-import 'pages/newsListWidget.dart';
-import 'file:///D:/www/yii2/Actuales/perlavision/web-apk-news/web_apk_news/lib/pages/newsDetailsWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
 import 'package:web_apk_news/shared/newsList.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
@@ -57,46 +55,6 @@ class _HomePageState extends State<HomePage>
     CustomTab(
       title: "Perdidas-Hallazgo",
     )
-  ];
-
-  // hard code for moment
-  List<NewsList> listTile = [
-    NewsList(
-        "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
-        lipsum.createWord(numWords: 6),
-        lipsum.createWord(numWords: 2),
-        "28 Jan 2020",
-        ""),
-    NewsList(
-        "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
-        lipsum.createWord(numWords: 6),
-        lipsum.createWord(numWords: 2),
-        "28 Jan 2020",
-        ""),
-    NewsList(
-        "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
-        lipsum.createWord(numWords: 6),
-        lipsum.createWord(numWords: 2),
-        "28 Jan 2020",
-        ""),
-    NewsList(
-        "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
-        lipsum.createWord(numWords: 6),
-        lipsum.createWord(numWords: 2),
-        "28 Jan 2020",
-        ""),
-    NewsList(
-        "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
-        lipsum.createWord(numWords: 6),
-        lipsum.createWord(numWords: 2),
-        "28 Jan 2020",
-        ""),
-    NewsList(
-        "https://image.nuevayork.com/wp-content/uploads/2012/09/Times-Square-in-New-York.jpg",
-        lipsum.createWord(numWords: 6),
-        lipsum.createWord(numWords: 2),
-        "28 Jan 2020",
-        ""),
   ];
 
   @override
