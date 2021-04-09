@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:web_apk_news/imageCardWidget.dart';
 import 'package:web_apk_news/pages/jobOffersWidget.dart';
+import 'package:web_apk_news/pages/lostFindingWidget.dart';
 import 'package:web_apk_news/pages/newsWidget.dart';
 import 'package:web_apk_news/shared/imageCard.dart';
 import 'custom/customHttpOverrides.dart';
@@ -110,8 +111,8 @@ class _HomePageState extends State<HomePage>
       body: TabBarView(
         controller: _tabController,
         children: [
-          News(),
-          News(),
+          News(present: true),
+          News(present: false),
           Padding(
             padding: EdgeInsets.all(5.0),
             child: Container(
@@ -134,10 +135,7 @@ class _HomePageState extends State<HomePage>
           ),
           JobOffers(),
           BillBoard(),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Container(),
-          ),
+          LostFinding()
         ],
       ),
     );

@@ -6,11 +6,16 @@ import 'newsDetailsWidget.dart';
 import 'newsListWidget.dart';
 
 class News extends StatefulWidget {
+  bool present;
+  News({Key key, this.present}) : super(key: key);
+
   @override
-  _NewsState createState() => _NewsState();
+  _NewsState createState() => _NewsState(this.present);
 }
 
 class _NewsState extends State<News> {
+  bool present;
+  _NewsState(this.present);
   final NewsApiService apiService = NewsApiService();
 
   @override
@@ -25,7 +30,7 @@ class _NewsState extends State<News> {
       child: Container(
         width: 100,
         child: FutureBuilder(
-          future: apiService.getAll(),
+          future: present ? apiService.getAll(true) : apiService.getAll(false),
           builder: (context, AsyncSnapshot<List<NewsList>> snapshot) {
             if (snapshot.hasError) {
               return Center(

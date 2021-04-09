@@ -1,19 +1,26 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:web_apk_news/models/newsModel.dart';
 import 'package:web_apk_news/shared/newsList.dart';
 import 'clientTokenApiService.dart';
 import 'package:web_apk_news/constant/constants.dart';
 
 class NewsApiService {
-  Future<List<NewsList>> getAll() async {
+  Future<List<NewsList>> getAll([bool present]) async {
     Dio _dio = new Dio();
     List<NewsList> result = [];
 
     try {
       var token = await ClientTokenApiService().getToken();
-      Response response = await _dio.get('$URL_API/noticias',
-          options: Options(headers: {'Authorization': 'Bearer $token'}));
-
+      Response response;
+      if (present) {
+        response = await _dio.get('$URL_API/noticias',
+            options: Options(headers: {'Authorization': 'Bearer $token'}),
+            queryParameters: {'flag': true});
+      } else {
+        response = await _dio.get('$URL_API/noticias',
+            options: Options(headers: {'Authorization': 'Bearer $token'}));
+      }
       if (response.statusCode == 200) {
         var responseData = (response.data['noticia'] as List)
             .map((news) => NewsModel.fromJson(news))
