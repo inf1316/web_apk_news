@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:web_apk_news/models/jobOffersModel.dart';
 import 'package:web_apk_news/constant/constants.dart';
@@ -13,14 +11,6 @@ class JobOffersApiService {
 
     try {
       var token = await ClientTokenApiService().getToken();
-
-      // See more: https://pub.dev/packages/dio - Https certificate verification
-      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (HttpClient client) {
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) => true;
-        return client;
-      };
 
       Response response = await _dio.get('$URL_API/ofertas-laborales',
           options: Options(headers: {'Authorization': 'Bearer $token'}));

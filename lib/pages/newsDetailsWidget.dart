@@ -31,12 +31,20 @@ class NewsDetailsScreen extends StatelessWidget {
                       children: [
                         Text(item.newsTitle,
                             style: TextStyle(
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.w500)
+                                fontSize: 22.0, fontWeight: FontWeight.w500)),
+                        SizedBox(
+                          height: 8.0,
                         ),
                         Row(
                           children: [
-                            Icon(Icons.person),
+                            CircleAvatar(
+                                backgroundColor: Color(0xffE6E6E6),
+                                radius: 13,
+                                child: CircleAvatar(
+                                  radius: 12,
+                                  backgroundImage:
+                                      NetworkImage(item.imageAuthor),
+                                )),
                             SizedBox(
                               width: 4.0,
                             ),
@@ -71,10 +79,8 @@ class NewsDetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: 16.0,
                         ),
-                        Text(
-                          item.content,
-                          style: TextStyle(fontSize: 18.0),
-                        )
+                        Text(item.content,
+                            style: TextStyle(fontSize: 18.0, height: 1.5))
                       ],
                     ),
                   )

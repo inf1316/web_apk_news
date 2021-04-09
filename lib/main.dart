@@ -7,8 +7,6 @@ import 'package:web_apk_news/shared/imageCard.dart';
 import 'custom/customHttpOverrides.dart';
 import 'pages/billboardWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
-import 'package:web_apk_news/shared/newsList.dart';
-import 'package:lipsum/lipsum.dart' as lipsum;
 
 void main() {
   HttpOverrides.global = new CustomHttpOverrides();

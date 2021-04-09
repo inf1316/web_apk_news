@@ -20,8 +20,13 @@ class NewsApiService {
             .toList();
 
         responseData.asMap().forEach((key, value) {
-          result.add(NewsList('$LOCALHOST' + value.imageNewsModel[0].url_img,
-              value.titular, value.journalistNewsModel[0].name, value.publicationDate, value.content));
+          result.add(NewsList(
+              '$LOCALHOST' + value.imageNewsModel[0].url_img,
+              value.titular,
+              value.journalistNewsModel[0].name,
+              '$LOCALHOST' + value.journalistNewsModel[0].imageUrl,
+              value.publicationDate,
+              value.content));
         });
 
         return result;

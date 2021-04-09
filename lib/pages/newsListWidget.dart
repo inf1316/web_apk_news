@@ -42,7 +42,7 @@ Widget listWidget(NewsList item) {
                   radius: 13,
                   child: CircleAvatar(
                     radius: 12,
-                    backgroundImage: NetworkImage("https://media-exp1.licdn.com/dms/image/C5603AQFj1aS63EknAA/profile-displayphoto-shrink_100_100/0/1552509106281?e=1623283200&v=beta&t=2iHLO2Jp28rfUsoJRuBpZI9GdZRXiqIljXf7TWD2eyQ"),
+                    backgroundImage: NetworkImage(item.imageAuthor),
                   )
                 ),
                 SizedBox(

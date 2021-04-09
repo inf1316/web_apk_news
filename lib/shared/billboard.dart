@@ -1,8 +1,7 @@
-class BillBoard {
-  String description;
-  String contactDetails;
-  String state;
+class BillBoards {
   String title;
+  String subtitle;
+  String hours;
 
-  BillBoard(this.description, this.contactDetails, this.state, this.title);
+  BillBoards({this.title, this.subtitle, this.hours});
 }
