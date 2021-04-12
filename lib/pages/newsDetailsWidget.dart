@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web_apk_news/service/newsApiService.dart';
 import 'package:web_apk_news/shared/newsList.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
@@ -11,6 +12,10 @@ class NewsDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // call to increase the views of the news
+    final NewsApiService apiService = NewsApiService();
+    apiService.setViews(item.view, item.idNews);
+
     return Container(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -71,7 +76,7 @@ class NewsDetailsScreen extends StatelessWidget {
                               width: 4.0,
                             ),
                             Text(
-                              "100",
+                              item.view.toString(),
                               style: TextStyle(fontSize: 12.0),
                             ),
                           ],

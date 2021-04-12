@@ -2,15 +2,16 @@ import 'imageNewsModel.dart';
 import 'journalistNewsModel.dart';
 
 class NewsModel {
-  int idNew;
+  int idNews;
   String publicationDate;
   String titular;
   String content;
+  int view;
   List<ImageNewsModel> imageNewsModel;
   List<JournalistNewsModel> journalistNewsModel;
 
   NewsModel(
-      {this.idNew,
+      {this.idNews,
       this.publicationDate,
       this.titular,
       this.content,
@@ -18,10 +19,11 @@ class NewsModel {
       this.journalistNewsModel});
 
   NewsModel.fromJson(Map<String, dynamic> json)
-      : idNew = json["id_noticias"],
+      : idNews = json["id_noticias"],
         publicationDate = json["fecha_publicacion"],
         titular = json["titular"],
         content = json["contenido"],
+        view = json["views"],
         imageNewsModel = (json['imgNoticias'] as List)
             .map((imageNews) => new ImageNewsModel.fromJson(imageNews))
             .toList(),

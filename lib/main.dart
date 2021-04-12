@@ -82,62 +82,78 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 110.0,
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
-        ),
-        backgroundColor: Color(0xFFFAFAFA),
-        centerTitle: true,
-        title: Text(
-          _myHandler.title,
-          style: TextStyle(color: Colors.black),
-        ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(30.0),
-          child: TabBar(
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
-            isScrollable: true,
-            controller: _tabController,
-            tabs: _tabList,
-          ),
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          News(present: true),
-          News(present: false),
-          Padding(
-            padding: EdgeInsets.all(5.0),
-            child: Container(
-              width: 100,
-              child: new ListView.builder(
-                  itemCount: 7,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      child: new Padding(
-                        padding: new EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 12.0),
-                        child: ImageCard(
-                          imageListCard: ImageListCard("This title Image",
-                              "19 March 2021", "10 min", "125k views", null),
-                        ),
-                      ),
-                    );
-                  }),
+        appBar: AppBar(
+          toolbarHeight: 110.0,
+          leading: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.menu,
+              color: Colors.black,
             ),
           ),
-          JobOffers(),
-          BillBoard(),
-          LostFinding()
-        ],
-      ),
-    );
+          backgroundColor: Color(0xFFFAFAFA),
+          centerTitle: true,
+          title: Text(
+            _myHandler.title,
+            style: TextStyle(color: Colors.black),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: new Icon(Icons.more_vert, color: Colors.black),
+              onPressed: () => print('hi on icon action'),
+            ),
+          ],
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(30.0),
+            child: TabBar(
+              indicatorColor: Colors.black,
+              labelColor: Colors.black,
+              isScrollable: true,
+              controller: _tabController,
+              tabs: _tabList,
+            ),
+          ),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            News(present: true),
+            News(present: false),
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: Container(
+                width: 100,
+                child: new ListView.builder(
+                    itemCount: 7,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        child: new Padding(
+                          padding: new EdgeInsets.symmetric(
+                              vertical: 12.0, horizontal: 12.0),
+                          child: ImageCard(
+                            imageListCard: ImageListCard("This title Image",
+                                "19 March 2021", "10 min", "125k views", null),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            ),
+            JobOffers(),
+            BillBoard(),
+            LostFinding()
+          ],
+        ),
+        floatingActionButton: Container(
+          width: 70.0,
+          height: 70.0,
+          child: FloatingActionButton(
+            onPressed: () {
+              setState(() {});
+            },
+            child: const Icon(Icons.refresh, color: Colors.black),
+            backgroundColor: Colors.white,
+          ),
+        ));
   }
 }

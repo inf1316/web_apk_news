@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_apk_news/service/billboardApiService.dart';
 import 'package:web_apk_news/shared/billboard.dart';
 import 'package:weekday_selector/weekday_selector.dart';
@@ -16,7 +17,9 @@ class _BillBoardState extends State<BillBoard> {
   var values = List.filled(7, false);
   var notification = false;
   final BillboardApiService apiService = BillboardApiService();
+
   int day = 0;
+  bool icons = true;
 
   @override
   void initState() {
@@ -63,10 +66,10 @@ class _BillBoardState extends State<BillBoard> {
                             Column(children: [Icon(Icons.error, size: 120)]));
                   } else if (snapshot.connectionState == ConnectionState.done &&
                       snapshot.hasData) {
-                    List<BillBoards> billboard = snapshot.data;
+                    List<BillBoards> billboards = snapshot.data;
                     return Container(
                       child: ListView.builder(
-                          itemCount: billboard.length,
+                          itemCount: billboards.length,
                           itemBuilder: (context, index) {
                             return Card(
                               child: Column(
@@ -74,25 +77,22 @@ class _BillBoardState extends State<BillBoard> {
                                 children: [
                                   Stack(children: [
                                     ListTile(
-                                      leading: Text(billboard[index].hours),
+                                      leading: Text(billboards[index].hours),
                                       title: Text(
-                                        billboard[index].title,
+                                        billboards[index].title,
                                         style: TextStyle(fontSize: 22.0),
                                       ),
+                                      trailing: IconButton(
+                                          onPressed: () {
+                                            savePreference(billboards[index]);
+                                          },
+                                          icon: obtainIcon(
+                                              context, billboards[index])),
                                       subtitle: Text(
-                                        billboard[index].subtitle,
+                                        billboards[index].subtitle,
                                         style: TextStyle(fontSize: 17.0),
                                       ),
-                                    ),
-                                    Positioned(
-                                      top: 0,
-                                      right: 0,
-                                      child: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.add_alert,
-                                            color: Colors.indigo),
-                                      ),
-                                    ),
+                                    )
                                   ])
                                 ],
                               ),
@@ -109,5 +109,33 @@ class _BillBoardState extends State<BillBoard> {
             )),
           ],
         )));
+  }
+
+  Future<void> savePreference(BillBoards billBoard) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(billBoard.title + billBoard.hours + day.toString(),
+        billBoard.title + ";" + billBoard.hours + ";" + day.toString());
+  }
+
+  // See more : https://flutteragency.com/how-to-assign-future-to-a-widget-in-flutter/
+  Widget obtainIcon(BuildContext context, BillBoards billBoard) {
+    return FutureBuilder(
+        future: SharedPreferences.getInstance(),
+        builder: (context, AsyncSnapshot<SharedPreferences> notification) {
+          String valueNotification;
+          try {
+            if (notification.data.containsKey(
+                billBoard.title + billBoard.hours + day.toString())) {
+
+              valueNotification = notification.data.getString(
+                  billBoard.title + billBoard.hours + day.toString());
+            }
+          } on Exception catch (ex) {}
+
+          if (valueNotification != null && valueNotification.isNotEmpty) {
+            return Icon(Icons.add_alert, color: Colors.indigo);
+          }
+          return Icon(Icons.add, color: Colors.indigo);
+        });
   }
 }

@@ -1,5 +1,5 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:web_apk_news/models/newsModel.dart';
 import 'package:web_apk_news/shared/newsList.dart';
 import 'clientTokenApiService.dart';
@@ -28,17 +28,43 @@ class NewsApiService {
 
         responseData.asMap().forEach((key, value) {
           result.add(NewsList(
-              '$LOCALHOST' + value.imageNewsModel[0].url_img,
-              value.titular,
-              value.journalistNewsModel[0].name,
-              '$LOCALHOST' + value.journalistNewsModel[0].imageUrl,
-              value.publicationDate,
-              value.content));
+              idNews: value.idNews,
+              imgUrl: '$LOCALHOST' + value.imageNewsModel[0].url_img,
+              newsTitle: value.titular,
+              author: value.journalistNewsModel[0].name,
+              imageAuthor: '$LOCALHOST' + value.journalistNewsModel[0].imageUrl,
+              content: value.content,
+              view: value.view,
+              date: value.publicationDate));
         });
 
         return result;
       } else {
         throw new Exception("Failed news ...");
+      }
+    } on DioError catch (ex) {
+      throw new Exception(ex);
+    }
+  }
+
+  Future<bool> setViews(int views, int idNews) async {
+    Dio _dio = new Dio();
+
+    try {
+      var token = await ClientTokenApiService().getToken();
+      var params = {"views": views += 1, "idNoticia": idNews};
+
+      Response response = await _dio.post('$URL_API/noticias/view',
+          data: params,
+          options: Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+            'Authorization': 'Bearer $token'
+          }));
+
+      if (response.statusCode == 200) {
+        return Future.value(true);
+      } else {
+        throw new Exception("Failed update views ...");
       }
     } on DioError catch (ex) {
       throw new Exception(ex);
