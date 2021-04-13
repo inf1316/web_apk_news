@@ -21,7 +21,7 @@ class ImageCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new ClipRRect(
-              child: new ImageSliders(),
+              child: new ImageSliders(imageList: imageListCard.urlImage),
               borderRadius: BorderRadius.only(
                   topLeft: new Radius.circular(16.0),
                   topRight: new Radius.circular(16.0)),

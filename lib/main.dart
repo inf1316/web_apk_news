@@ -1,10 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:web_apk_news/imageCardWidget.dart';
+import 'package:web_apk_news/pages/imageListWidget.dart';
 import 'package:web_apk_news/pages/jobOffersWidget.dart';
 import 'package:web_apk_news/pages/lostFindingWidget.dart';
 import 'package:web_apk_news/pages/newsWidget.dart';
-import 'package:web_apk_news/shared/imageCard.dart';
 import 'custom/customHttpOverrides.dart';
 import 'pages/billboardWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
@@ -119,30 +118,11 @@ class _HomePageState extends State<HomePage>
           children: [
             News(present: true),
             News(present: false),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Container(
-                width: 100,
-                child: new ListView.builder(
-                    itemCount: 7,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        child: new Padding(
-                          padding: new EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 12.0),
-                          child: ImageCard(
-                            imageListCard: ImageListCard("This title Image",
-                                "19 March 2021", "10 min", "125k views", null),
-                          ),
-                        ),
-                      );
-                    }),
-              ),
-            ),
+            ImageList(),
             JobOffers(),
             BillBoard(),
             LostFinding()
-          ],
+          ]
         ),
         floatingActionButton: Container(
           width: 70.0,
