@@ -34,7 +34,7 @@ class ImageCard extends StatelessWidget {
                 children: <Widget>[
                   new Text(
                     imageListCard.imageTitle.toUpperCase(),
-                    style: Theme.of(context).textTheme.headline6,
+                    style: TextStyle(fontSize: 16.0),
                   ),
                   new SizedBox(
                     height: 16.0,
@@ -42,9 +42,18 @@ class ImageCard extends StatelessWidget {
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      new Text(imageListCard.datePublication),
-                      new Text(imageListCard.timePublication),
-                      new Text(imageListCard.viewImage)
+                      new Text(
+                        imageListCard.datePublication,
+                        style: TextStyle(fontSize: 13.0),
+                      ),
+                      new Text(
+                        imageListCard.timePublication,
+                        style: TextStyle(fontSize: 13.0),
+                      ),
+                      new Text(
+                        imageListCard.viewImage,
+                        style: TextStyle(fontSize: 13.0),
+                      )
                     ],
                   )
                 ],

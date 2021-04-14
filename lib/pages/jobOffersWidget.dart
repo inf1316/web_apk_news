@@ -40,18 +40,18 @@ class _JobOffersState extends State<JobOffers> {
                             leading: Icon(
                               Icons.visibility,
                               color: Colors.black,
-                              size: 30,
+                              size: 28,
                             ),
                             title: Text(
                               jobOffer[index].title,
-                              style: TextStyle(fontSize: 20.0),
+                              style: TextStyle(fontSize: 17.0),
                             ),
                             subtitle: Text(
                               jobOffer[index].subTitle,
-                              style: TextStyle(fontSize: 15.0),
+                              style: TextStyle(fontSize: 13.0),
                             ),
                           ),
-                          SizedBox(height: 12),
+                          SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +62,7 @@ class _JobOffersState extends State<JobOffers> {
                               Icon(Icons.phone),
                               Text(
                                 jobOffer[index].phone,
-                                style: TextStyle(fontSize: 15.0),
+                                style: TextStyle(fontSize: 12.0),
                                 textAlign: TextAlign.center,
                               ),
                             ],

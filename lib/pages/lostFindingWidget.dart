@@ -40,15 +40,15 @@ class _LostFindingState extends State<LostFinding> {
                             leading: Icon(
                               Icons.add_alert,
                               color: Colors.black,
-                              size: 30,
+                              size: 25,
                             ),
                             title: Text(
                               lostFinding[index].titular,
-                              style: TextStyle(fontSize: 20.0),
+                              style: TextStyle(fontSize: 18.0),
                             ),
                             subtitle: Text(
                               lostFinding[index].description,
-                              style: TextStyle(fontSize: 15.0),
+                              style: TextStyle(fontSize: 14.0),
                             ),
                           ),
                           SizedBox(height: 12),
@@ -62,7 +62,7 @@ class _LostFindingState extends State<LostFinding> {
                               Icon(Icons.phone),
                               Text(
                                 lostFinding[index].contactDetails,
-                                style: TextStyle(fontSize: 15.0),
+                                style: TextStyle(fontSize: 13.0),
                                 textAlign: TextAlign.center,
                               ),
                             ],

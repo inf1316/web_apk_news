@@ -24,7 +24,7 @@ class _ImageListState extends State<ImageList> {
     return Padding(
       padding: EdgeInsets.all(5.0),
       child: Container(
-        width: 100,
+        width: 80,
         child: FutureBuilder(
             future: apiService.getAll(),
             builder: (context, AsyncSnapshot<List<ImageListCard>> snapshot) {

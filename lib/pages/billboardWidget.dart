@@ -80,7 +80,7 @@ class _BillBoardState extends State<BillBoard> {
                                       leading: Text(billboards[index].hours),
                                       title: Text(
                                         billboards[index].title,
-                                        style: TextStyle(fontSize: 22.0),
+                                        style: TextStyle(fontSize: 18.0),
                                       ),
                                       trailing: IconButton(
                                           onPressed: () {
@@ -90,7 +90,7 @@ class _BillBoardState extends State<BillBoard> {
                                               context, billboards[index])),
                                       subtitle: Text(
                                         billboards[index].subtitle,
-                                        style: TextStyle(fontSize: 17.0),
+                                        style: TextStyle(fontSize: 14.0),
                                       ),
                                     )
                                   ])

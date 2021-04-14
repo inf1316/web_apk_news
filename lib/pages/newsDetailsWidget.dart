@@ -36,7 +36,7 @@ class NewsDetailsScreen extends StatelessWidget {
                       children: [
                         Text(item.newsTitle,
                             style: TextStyle(
-                                fontSize: 22.0, fontWeight: FontWeight.w500)),
+                                fontSize: 20.0, fontWeight: FontWeight.w500)),
                         SizedBox(
                           height: 8.0,
                         ),
@@ -85,7 +85,7 @@ class NewsDetailsScreen extends StatelessWidget {
                           height: 16.0,
                         ),
                         Text(item.content,
-                            style: TextStyle(fontSize: 18.0, height: 1.5))
+                            style: TextStyle(fontSize: 15.0, height: 1.5))
                       ],
                     ),
                   )

@@ -31,7 +31,7 @@ Widget listWidget(NewsList item) {
             children: [
               Text(
                 item.newsTitle,
-                style: TextStyle(fontSize: 18.00),
+                style: TextStyle(fontSize: 15.00),
               ),
               SizedBox(
                 height: 10.0,
@@ -50,7 +50,7 @@ Widget listWidget(NewsList item) {
                 ),
                 Text(
                   item.author,
-                  style: TextStyle(fontSize: 12.0),
+                  style: TextStyle(fontSize: 9.0),
                 ),
                 SizedBox(
                   width: 12.0,
@@ -58,7 +58,7 @@ Widget listWidget(NewsList item) {
                 Icon(Icons.date_range),
                 Text(
                   item.date,
-                  style: TextStyle(fontSize: 12.0),
+                  style: TextStyle(fontSize: 9.0),
                 )
               ])
             ],
