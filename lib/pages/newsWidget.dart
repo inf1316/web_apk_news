@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:web_apk_news/service/newsApiService.dart';
 import 'package:web_apk_news/shared/newsList.dart';
 import 'newsDetailsWidget.dart';
@@ -44,10 +45,13 @@ class _NewsState extends State<News> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => NewsDetailsScreen(
-                                    item: news[index],
-                                    tag: news[index].newsTitle)));
+                            PageTransition(
+                              type: PageTransitionType.scale,
+                              alignment: Alignment.bottomCenter,
+                              child: NewsDetailsScreen(
+                                  item: news[index],
+                                  tag: news[index].newsTitle),
+                            ));
                       },
                       child: listWidget(news[index]),
                     );

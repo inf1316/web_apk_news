@@ -19,7 +19,6 @@ class _BillBoardState extends State<BillBoard> {
   final BillboardApiService apiService = BillboardApiService();
 
   int day = 0;
-  bool icons = true;
 
   @override
   void initState() {
@@ -85,6 +84,7 @@ class _BillBoardState extends State<BillBoard> {
                                       trailing: IconButton(
                                           onPressed: () {
                                             savePreference(billboards[index]);
+                                            setState(() {});
                                           },
                                           icon: obtainIcon(
                                               context, billboards[index])),
@@ -100,9 +100,7 @@ class _BillBoardState extends State<BillBoard> {
                           }),
                     );
                   } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return Center(child: CircularProgressIndicator());
                   }
                 },
               ),
@@ -124,9 +122,13 @@ class _BillBoardState extends State<BillBoard> {
         builder: (context, AsyncSnapshot<SharedPreferences> notification) {
           String valueNotification;
           try {
-            if (notification.data.containsKey(
-                billBoard.title + billBoard.hours + day.toString())) {
-
+            if (billBoard != null &&
+                notification.data != null &&
+                notification.data.containsKey(
+                        billBoard.title + billBoard.hours + day.toString()) !=
+                    null &&
+                notification.data.containsKey(
+                    billBoard.title + billBoard.hours + day.toString())) {
               valueNotification = notification.data.getString(
                   billBoard.title + billBoard.hours + day.toString());
             }

@@ -55,7 +55,7 @@ Widget listWidget(NewsList item) {
                 SizedBox(
                   width: 12.0,
                 ),
-                Icon(Icons.date_range),
+                Icon(Icons.date_range, size: 20),
                 Text(
                   item.date,
                   style: TextStyle(fontSize: 9.0),

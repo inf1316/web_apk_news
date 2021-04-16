@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage>
       title: "Noticias",
     ),
     CustomTab(
-      title: "Galería Imagenes",
+      title: "Galerías",
     ),
     CustomTab(
       title: "Ofertas Laborales",
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 110.0,
+          toolbarHeight: 95.0,
           leading: IconButton(
             onPressed: () {},
             icon: Icon(
@@ -125,8 +125,8 @@ class _HomePageState extends State<HomePage>
           ]
         ),
         floatingActionButton: Container(
-          width: 70.0,
-          height: 70.0,
+          width: 50.0,
+          height: 50.0,
           child: FloatingActionButton(
             onPressed: () {
               setState(() {});

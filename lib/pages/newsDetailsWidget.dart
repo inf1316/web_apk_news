@@ -60,7 +60,7 @@ class NewsDetailsScreen extends StatelessWidget {
                             SizedBox(
                               width: 10.0,
                             ),
-                            Icon(Icons.date_range),
+                            Icon(Icons.date_range, size: 20),
                             SizedBox(
                               width: 4.0,
                             ),
