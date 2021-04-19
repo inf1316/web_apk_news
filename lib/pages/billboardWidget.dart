@@ -84,7 +84,6 @@ class _BillBoardState extends State<BillBoard> {
                                       trailing: IconButton(
                                           onPressed: () {
                                             savePreference(billboards[index]);
-                                            setState(() {});
                                           },
                                           icon: obtainIcon(
                                               context, billboards[index])),
@@ -135,9 +134,9 @@ class _BillBoardState extends State<BillBoard> {
           } on Exception catch (ex) {}
 
           if (valueNotification != null && valueNotification.isNotEmpty) {
-            return Icon(Icons.add_alert, color: Colors.indigo);
+            return Icon(Icons.notifications_active_outlined, color: Colors.indigo);
           }
-          return Icon(Icons.add, color: Colors.indigo);
+          return Icon(Icons.notifications_off_outlined, color: Colors.indigo);
         });
   }
 }

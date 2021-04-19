@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.web_apk_news">
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Add below permission inside 'manifest' tag -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
    <application
         android:label="web_apk_news"
         android:icon="@mipmap/ic_launcher">
@@ -40,5 +42,14 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+       <!-- Add below permission inside 'application' tag -->
+       <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+           <intent-filter>
+               <action android:name="android.intent.action.BOOT_COMPLETED"/>
+               <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+           </intent-filter>
+       </receiver>
+
     </application>
 </manifest>

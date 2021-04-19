@@ -11,7 +11,7 @@ class PublicationModel {
   PublicationModel.fromJson(Map<String, dynamic> json)
       : title = json["titulo"],
         datePublication = json["fecha_publicacion"],
-        view = json["view"],
+        view = (json["view"] as int).toString(),
         publicationImageModel = (json['imgPublicacions'] as List)
             .map((publicationImageModel) =>
                 new PublicationImageModel.fromJson(publicationImageModel))
