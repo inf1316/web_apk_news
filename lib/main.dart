@@ -121,6 +121,7 @@ class _HomePageState extends State<HomePage>
               labelColor: Colors.black,
               isScrollable: true,
               controller: _tabController,
+
               tabs: _tabList,
             ),
           ),
