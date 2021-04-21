@@ -1,25 +1,56 @@
 import 'dart:io';
+import 'dart:math';
+import 'dart:ui';
+import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:web_apk_news/pages/imageListWidget.dart';
 import 'package:web_apk_news/pages/jobOffersWidget.dart';
 import 'package:web_apk_news/pages/lostFindingWidget.dart';
 import 'package:web_apk_news/pages/newsWidget.dart';
-import 'package:workmanager/workmanager.dart';
 import 'custom/customHttpOverrides.dart';
 import 'pages/billboardWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
 
-void main() {
-  // See more : https://www.geeksforgeeks.org/background-local-notifications-in-flutter/
-  WidgetsFlutterBinding.ensureInitialized();
-  Workmanager.initialize(callbackDispatcher, isInDebugMode: false);
-  Workmanager.registerPeriodicTask(
-    "2",
-    "simplePeriodicTask",
-    frequency: Duration(minutes: 15),
+Future<void> fireAlarm() async {
+  FlutterLocalNotificationsPlugin flip = new FlutterLocalNotificationsPlugin();
+
+  var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
+  var IOS = new IOSInitializationSettings();
+  var settings = new InitializationSettings(android, IOS);
+  flip.initialize(settings);
+
+  var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+      'your channel id',
+      'your channel name',
+      'your channel description',
+      importance: Importance.Max,
+      priority: Priority.High
   );
+
+  var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+  var platformChannelSpecifics = new NotificationDetails(
+      androidPlatformChannelSpecifics,
+      iOSPlatformChannelSpecifics
+  );
+
+  await flip.show(0, 'GeeksforGeeks',
+      'Your are one step away to connect with GeeksforGeeks',
+      platformChannelSpecifics, payload: 'Default_Sound'
+  );
+
+  print('Alarm Fired at ${DateTime.now()}');
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = new CustomHttpOverrides();
+  await AndroidAlarmManager.initialize();
+
+  await AndroidAlarmManager.periodic(
+      const Duration(minutes: 1), Random().nextInt(pow(2, 31)), fireAlarm,
+      exact: true, wakeup: true);
+
   runApp(MyApp());
 }
 
@@ -94,9 +125,7 @@ class _HomePageState extends State<HomePage>
         appBar: AppBar(
           toolbarHeight: 95.0,
           leading: IconButton(
-            onPressed: () {
-
-            },
+            onPressed: () {},
             icon: Icon(
               Icons.menu,
               color: Colors.black,
@@ -121,7 +150,6 @@ class _HomePageState extends State<HomePage>
               labelColor: Colors.black,
               isScrollable: true,
               controller: _tabController,
-
               tabs: _tabList,
             ),
           ),
@@ -146,36 +174,4 @@ class _HomePageState extends State<HomePage>
           ),
         ));
   }
-}
-
-void callbackDispatcher() {
-  Workmanager.executeTask((task, inputData) {
-    FlutterLocalNotificationsPlugin flip =
-        new FlutterLocalNotificationsPlugin();
-
-    var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
-    var IOS = new IOSInitializationSettings();
-
-    var settings = new InitializationSettings(android, IOS);
-    flip.initialize(settings);
-    _showNotificationWithDefaultSound(flip);
-    return Future.value(true);
-  });
-}
-
-Future _showNotificationWithDefaultSound(flip) async {
-  var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-      'your channel id', 'your channel name', 'your channel description',
-      importance: Importance.Max, priority: Priority.High);
-  var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-
-  var platformChannelSpecifics = new NotificationDetails(
-      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-
-  await flip.show(
-      0,
-      'GeeksforGeeks',
-      'Your are one step away to connect with GeeksforGeeks',
-      platformChannelSpecifics,
-      payload: 'Default_Sound');
 }

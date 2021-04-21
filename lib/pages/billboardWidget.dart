@@ -84,6 +84,7 @@ class _BillBoardState extends State<BillBoard> {
                                       trailing: IconButton(
                                           onPressed: () {
                                             savePreference(billboards[index]);
+                                            setState(() {});
                                           },
                                           icon: obtainIcon(
                                               context, billboards[index])),
@@ -110,8 +111,15 @@ class _BillBoardState extends State<BillBoard> {
 
   Future<void> savePreference(BillBoards billBoard) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(billBoard.title + billBoard.hours + day.toString(),
-        billBoard.title + ";" + billBoard.hours + ";" + day.toString());
+    if (prefs.containsKey(billBoard.title + billBoard.hours + day.toString()) ==
+            null ||
+        !(prefs
+            .containsKey(billBoard.title + billBoard.hours + day.toString()))) {
+      prefs.setString(billBoard.title + billBoard.hours + day.toString(),
+          billBoard.title + ";" + billBoard.hours + ";" + day.toString());
+    } else {
+      prefs.remove(billBoard.title + billBoard.hours + day.toString());
+    }
   }
 
   // See more : https://flutteragency.com/how-to-assign-future-to-a-widget-in-flutter/
@@ -134,7 +142,8 @@ class _BillBoardState extends State<BillBoard> {
           } on Exception catch (ex) {}
 
           if (valueNotification != null && valueNotification.isNotEmpty) {
-            return Icon(Icons.notifications_active_outlined, color: Colors.indigo);
+            return Icon(Icons.notifications_active_outlined,
+                color: Colors.indigo);
           }
           return Icon(Icons.notifications_off_outlined, color: Colors.indigo);
         });
