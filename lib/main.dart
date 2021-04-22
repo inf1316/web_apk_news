@@ -3,42 +3,17 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:web_apk_news/pages/imageListWidget.dart';
 import 'package:web_apk_news/pages/jobOffersWidget.dart';
 import 'package:web_apk_news/pages/lostFindingWidget.dart';
 import 'package:web_apk_news/pages/newsWidget.dart';
 import 'custom/customHttpOverrides.dart';
+import 'custom/notificationPush.dart';
 import 'pages/billboardWidget.dart';
 import 'package:web_apk_news/shared/customTab.dart';
 
 Future<void> fireAlarm() async {
-  FlutterLocalNotificationsPlugin flip = new FlutterLocalNotificationsPlugin();
-
-  var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
-  var IOS = new IOSInitializationSettings();
-  var settings = new InitializationSettings(android, IOS);
-  flip.initialize(settings);
-
-  var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-      'your channel id',
-      'your channel name',
-      'your channel description',
-      importance: Importance.Max,
-      priority: Priority.High
-  );
-
-  var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-  var platformChannelSpecifics = new NotificationDetails(
-      androidPlatformChannelSpecifics,
-      iOSPlatformChannelSpecifics
-  );
-
-  await flip.show(0, 'GeeksforGeeks',
-      'Your are one step away to connect with GeeksforGeeks',
-      platformChannelSpecifics, payload: 'Default_Sound'
-  );
-
+  await NotificationPush.notification();
   print('Alarm Fired at ${DateTime.now()}');
 }
 
