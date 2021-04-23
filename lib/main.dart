@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
+import 'package:draggable_floating_button/draggable_floating_button.dart';
 import 'package:flutter/material.dart';
 import 'package:web_apk_news/pages/imageListWidget.dart';
 import 'package:web_apk_news/pages/jobOffersWidget.dart';
@@ -97,56 +98,64 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 95.0,
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.menu,
-              color: Colors.black,
-            ),
-          ),
-          backgroundColor: Color(0xFFFAFAFA),
-          centerTitle: true,
-          title: Text(
-            _myHandler.title,
-            style: TextStyle(color: Colors.black),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: new Icon(Icons.more_vert, color: Colors.black),
-              onPressed: () => print('hi on icon action'),
-            ),
-          ],
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(30.0),
-            child: TabBar(
-              indicatorColor: Colors.black,
-              labelColor: Colors.black,
-              isScrollable: true,
-              controller: _tabController,
-              tabs: _tabList,
-            ),
-          ),
-        ),
+        appBar: getAppBar(),
         body: TabBarView(controller: _tabController, children: [
           News(present: true),
           News(present: false),
           ImageList(),
           JobOffers(),
           BillBoard(),
-          LostFinding()
+          LostFinding(),
         ]),
-        floatingActionButton: Container(
-          width: 50.0,
-          height: 50.0,
-          child: FloatingActionButton(
-            onPressed: () {
-              setState(() {});
-            },
-            child: const Icon(Icons.refresh, color: Colors.black),
-            backgroundColor: Colors.white,
-          ),
+        floatingActionButton: SizedBox(
+          height: 50,
+          width: 50,
+          child: DraggableFloatingActionButton(
+              backgroundColor: Colors.white,
+              child: new Icon(
+                Icons.refresh,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                setState(() {});
+              },
+              appContext: context,
+              appBar: getAppBar()),
         ));
+  }
+
+  Widget getAppBar() {
+    return AppBar(
+      toolbarHeight: 95.0,
+      leading: IconButton(
+        onPressed: () {},
+        icon: Icon(
+          Icons.menu,
+          color: Colors.black,
+        ),
+      ),
+      backgroundColor: Color(0xFFFAFAFA),
+      centerTitle: true,
+      title: Text(
+        _myHandler.title,
+        style: TextStyle(color: Colors.black),
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: new Icon(Icons.more_vert, color: Colors.black),
+          onPressed: () => print('hi on icon action'),
+        ),
+      ],
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(30.0),
+        child: TabBar(
+          indicatorColor: Colors.black,
+          labelColor: Colors.black,
+          isScrollable: true,
+          controller: _tabController,
+          tabs: _tabList,
+        ),
+      ),
+    );
   }
 }
