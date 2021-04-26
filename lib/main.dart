@@ -98,18 +98,18 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: getAppBar(),
-        body: TabBarView(controller: _tabController, children: [
-          News(present: true),
-          News(present: false),
-          ImageList(),
-          JobOffers(),
-          BillBoard(),
-          LostFinding(),
-        ]),
-        floatingActionButton: SizedBox(
-          height: 50,
-          width: 50,
+      appBar: getAppBar(),
+      body: TabBarView(controller: _tabController, children: [
+        News(present: true),
+        News(present: false),
+        ImageList(),
+        JobOffers(),
+        BillBoard(),
+        LostFinding(),
+      ]),
+      floatingActionButton: Stack(children: [
+        Container(
+          alignment: Alignment.bottomRight,
           child: DraggableFloatingActionButton(
               backgroundColor: Colors.white,
               child: new Icon(
@@ -121,7 +121,9 @@ class _HomePageState extends State<HomePage>
               },
               appContext: context,
               appBar: getAppBar()),
-        ));
+        ),
+      ]),
+    );
   }
 
   Widget getAppBar() {

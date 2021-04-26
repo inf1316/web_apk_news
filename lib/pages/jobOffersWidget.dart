@@ -38,7 +38,7 @@ class _JobOffersState extends State<JobOffers> {
                         children: [
                           ListTile(
                             leading: Icon(
-                              Icons.visibility,
+                              Icons.visibility_outlined,
                               color: Colors.black,
                               size: 28,
                             ),

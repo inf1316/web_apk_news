@@ -38,7 +38,7 @@ class _LostFindingState extends State<LostFinding> {
                         children: [
                           ListTile(
                             leading: Icon(
-                              Icons.add_alert,
+                              Icons.notifications_active_outlined,
                               color: Colors.black,
                               size: 25,
                             ),

@@ -1,13 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web_apk_news/service/publicationApiService.dart';
 
 import 'imageFullScreenWidget.dart';
 
 class ImageSliders extends StatelessWidget {
   final List<String> imageList;
+  final PublicationApiService apiService = PublicationApiService();
+  int view;
+  int idPublication;
 
-  ImageSliders({Key key, @required this.imageList}) : super(key: key);
+  ImageSliders(
+      {Key key,
+      @required this.imageList,
+      @required this.view,
+      this.idPublication})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +30,13 @@ class ImageSliders extends StatelessWidget {
                       children: <Widget>[
                         InkResponse(
                             onTap: () {
+                              apiService.setViews(view, idPublication);
                               Navigator.push<Widget>(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ImageFullScreen(item),
+                                  builder: (context) {
+                                    return ImageFullScreen(item);
+                                  },
                                 ),
                               );
                             },
