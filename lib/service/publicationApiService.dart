@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:time_machine/time_machine.dart';
 import 'package:web_apk_news/constant/constants.dart';
 import 'package:web_apk_news/models/publicationModel.dart';
 import 'package:web_apk_news/shared/imageCard.dart';
@@ -26,14 +27,15 @@ class PublicationApiService {
         responseData.asMap().forEach((key, value) {
           result.add(
             new ImageListCard(
-                value.title,
-                value.datePublication,
-                "10 min",
-                (value.view),
-                value.publicationImageModel
-                    .map((e) => '$LOCALHOST' + e.urlImage)
-                    .toList(),
-                (value.idPublication)),
+              value.title,
+              value.datePublication,
+              this.differenceDate(value.dateFullPublication),
+              (value.view),
+              value.publicationImageModel
+                  .map((e) => '$LOCALHOST' + e.urlImage)
+                  .toList(),
+              (value.idPublication),
+            ),
           );
         });
         return result;
@@ -66,6 +68,35 @@ class PublicationApiService {
       }
     } on DioError catch (ex) {
       throw new Exception(ex);
+    }
+  }
+
+  String differenceDate(String date) {
+    try {
+      LocalDateTime a = LocalDateTime.now();
+      LocalDateTime b = LocalDateTime.dateTime(DateTime.parse(date));
+
+      Period diff = b.periodSince(a);
+      print(
+          "years: ${diff.years}; months: ${diff.months}; days: ${diff.days}; hours: ${diff.hours}; minutes: ${diff.minutes}; seconds: ${diff.seconds}");
+
+      if (diff.months > 0 && diff.weeks >= 0) {
+        return "${diff.months} mes ${diff.weeks} semana";
+      } else if (diff.months > 0 && diff.days >= 0) {
+        return "${diff.months} mes ${diff.days} días";
+      } else if (diff.weeks > 0 && diff.days > 0) {
+        return "${diff.weeks} semana ${diff.days} días";
+      } else if (diff.days > 0 && diff.hours > 0) {
+        return "${diff.days} días ${diff.hours} horas";
+      } else if (diff.hours > 0 && diff.minutes > 0) {
+        return "${diff.hours} horas ${diff.minutes} minutos";
+      } else if (diff.minutes > 0) {
+        return "${diff.minutes} minutos";
+      } else {
+        return "1 min";
+      }
+    } on Exception catch (ex) {
+      return "10 min";
     }
   }
 }

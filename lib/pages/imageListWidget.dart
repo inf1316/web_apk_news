@@ -42,13 +42,12 @@ class _ImageListState extends State<ImageList> {
                               vertical: 12.0, horizontal: 12.0),
                           child: ImageCard(
                             imageListCard: ImageListCard(
-                              imageCard[index].imageTitle,
-                              imageCard[index].datePublication,
-                              "10 min",
-                              imageCard[index].viewImage,
-                              imageCard[index].urlImage,
-                              imageCard[index].idPublication,
-                            ),
+                                imageCard[index].imageTitle,
+                                imageCard[index].datePublication,
+                                imageCard[index].timePublication,
+                                imageCard[index].viewImage,
+                                imageCard[index].urlImage,
+                                imageCard[index].idPublication),
                           ),
                         ),
                         onTap: () {

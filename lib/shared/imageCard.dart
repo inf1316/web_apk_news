@@ -8,6 +8,12 @@ class ImageListCard {
   int viewImage;
   List<String> urlImage;
 
-  ImageListCard(this.imageTitle, this.datePublication, this.timePublication,
-      this.viewImage, this.urlImage, this.idPublication);
+  ImageListCard(
+    this.imageTitle,
+    this.datePublication,
+    this.timePublication,
+    this.viewImage,
+    this.urlImage,
+    this.idPublication,
+  );
 }

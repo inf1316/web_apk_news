@@ -27,7 +27,7 @@ class NewsDetailsScreen extends StatelessWidget {
                 children: [
                   Hero(
                     tag: '${item.newsTitle}',
-                    child: Image.network(item.imgUrl),
+                    child: Image.network(item.imgUrl, fit: BoxFit.cover),
                   ),
                   SizedBox(height: 12.0),
                   Padding(
