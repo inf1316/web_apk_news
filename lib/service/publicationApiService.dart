@@ -73,10 +73,14 @@ class PublicationApiService {
 
   String differenceDate(String date) {
     try {
-      LocalDateTime a = LocalDateTime.now();
-      LocalDateTime b = LocalDateTime.dateTime(DateTime.parse(date));
+      LocalDateTime dateTimeNow = LocalDateTime.now();
+      LocalDateTime dateTimePublication =
+          LocalDateTime.dateTime(DateTime.parse(date));
 
-      Period diff = b.periodSince(a);
+      print(
+          'Date Time Now ${dateTimeNow}  Date Time Publication ${dateTimePublication} ');
+
+      Period diff = dateTimePublication.periodSince(dateTimeNow);
       print(
           "years: ${diff.years}; months: ${diff.months}; days: ${diff.days}; hours: ${diff.hours}; minutes: ${diff.minutes}; seconds: ${diff.seconds}");
 
