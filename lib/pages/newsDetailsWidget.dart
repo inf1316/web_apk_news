@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:web_apk_news/custom/tweetWebView.dart';
 import 'package:web_apk_news/service/newsApiService.dart';
 import 'package:web_apk_news/shared/newsList.dart';
 
@@ -85,7 +86,9 @@ class NewsDetailsScreen extends StatelessWidget {
                           height: 16.0,
                         ),
                         Text(item.content,
-                            style: TextStyle(fontSize: 15.0, height: 1.5))
+                            style: TextStyle(fontSize: 15.0, height: 1.5)),
+                        TweetWebView.tweetUrl(
+                            "https://twitter.com/codificados_web/status/1386896139732111363")
                       ],
                     ),
                   )
