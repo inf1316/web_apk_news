@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:draggable_floating_button/draggable_floating_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:web_apk_news/pages/imageListWidget.dart';
 import 'package:web_apk_news/pages/jobOffersWidget.dart';
 import 'package:web_apk_news/pages/lostFindingWidget.dart';
@@ -145,7 +146,29 @@ class _HomePageState extends State<HomePage>
       actions: <Widget>[
         IconButton(
           icon: new Icon(Icons.more_vert, color: Colors.black),
-          onPressed: () => print('hi on icon action'),
+          onPressed: () => showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text("Perla News"),
+                  content: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          child: Text("Grupo de Desarrollo Perlavisión"),
+                        ),
+                        SizedBox(
+                          child: Center(
+                            child: Text("Versión 1.0 Beta"),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              }),
         ),
       ],
       bottom: PreferredSize(

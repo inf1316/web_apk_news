@@ -45,7 +45,7 @@ class BillboardApiService {
       case 2:
         return "martes";
       case 3:
-        return "miercoles";
+        return "miércoles";
       case 4:
         return "jueves";
       case 5:
