@@ -7,7 +7,7 @@ class NotificationPush {
     FlutterLocalNotificationsPlugin flip =
         new FlutterLocalNotificationsPlugin();
 
-    var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var android = new AndroidInitializationSettings('@mipmap/icon');
     var settings =
         new InitializationSettings(android, new IOSInitializationSettings());
     flip.initialize(settings);
