@@ -1,11 +1,11 @@
 // for show card image
 
 class ImageListCard {
-  int idPublication;
+  String idPublication;
   String imageTitle;
   String datePublication;
   String timePublication;
-  int viewImage;
+  String viewImage;
   List<String> urlImage;
 
   ImageListCard(

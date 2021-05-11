@@ -8,8 +8,8 @@ import 'imageFullScreenWidget.dart';
 class ImageSliders extends StatelessWidget {
   final List<String> imageList;
   final PublicationApiService apiService = PublicationApiService();
-  int view;
-  int idPublication;
+  String view;
+  String idPublication;
 
   ImageSliders(
       {Key key,

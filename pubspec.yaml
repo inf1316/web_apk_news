@@ -43,6 +43,7 @@ dependencies:
   time_machine: ^0.9.16
   webview_flutter: ^2.0.4
   path_provider: ^2.0.1
+  string_validator: ^0.3.0
 
 
 dev_dependencies:

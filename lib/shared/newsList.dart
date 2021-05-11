@@ -1,12 +1,12 @@
 class NewsList {
-  int idNews;
+  String idNews;
   String imgUrl;
   String newsTitle;
   String author;
   String imageAuthor;
   String date;
   String content;
-  int view;
+  String view;
 
   NewsList(
       {this.idNews,

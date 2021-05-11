@@ -47,10 +47,12 @@ class _TweetWebViewState extends State<TweetWebView> {
           initialUrl: downloadUrl, javascriptMode: JavascriptMode.unrestricted);
 
       final box = LimitedBox(
-        maxHeight: 300.0,
+        maxHeight: 250.0,
         child: webView,
       );
-      child = box;
+      child = Center(
+        child: box,
+      );
     } else {
       child = Center(
         child: CircularProgressIndicator(),

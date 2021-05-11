@@ -47,12 +47,13 @@ class PublicationApiService {
     }
   }
 
-  Future<bool> setViews(int views, int idPublication) async {
+  Future<bool> setViews(String views, String idPublication) async {
     Dio _dio = new Dio();
 
     try {
+      int viewParse = int.parse(views);
       var token = await ClientTokenApiService().getToken();
-      var params = {"views": views += 1, "id_publicacion": idPublication};
+      var params = {"views": viewParse += 1, "id_publicacion": idPublication};
 
       Response response = await _dio.post('$URL_API/publicaciones/view',
           data: params,

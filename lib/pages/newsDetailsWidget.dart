@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:web_apk_news/custom/tweetWebView.dart';
 import 'package:web_apk_news/service/newsApiService.dart';
 import 'package:web_apk_news/shared/newsList.dart';
+import 'package:string_validator/string_validator.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
   final String tag;
@@ -85,10 +86,7 @@ class NewsDetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: 16.0,
                         ),
-                        Text(item.content,
-                            style: TextStyle(fontSize: 15.0, height: 1.5)),
-                        TweetWebView.tweetUrl(
-                            "https://twitter.com/codificados_web/status/1386896139732111363")
+                        listWidget(item.content)
                       ],
                     ),
                   )
@@ -110,6 +108,39 @@ class NewsDetailsScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget listWidget(String content) {
+    var portions = content.split('%');
+    var endContent = [];
+
+    var paragraph = "";
+    List<Widget> widget = [];
+
+    // format string
+    for (var element in portions) {
+      if (element.contains('https://')) {
+        endContent.add(paragraph);
+        endContent.add(element.trim());
+        paragraph = "";
+      } else {
+        paragraph += element + " ";
+      }
+    }
+    endContent.add(paragraph);
+
+    for (var element in endContent) {
+      if (element.contains('https://')) {
+        widget.add(TweetWebView.tweetUrl(element));
+      } else {
+        widget.add(
+          Text(element, style: TextStyle(fontSize: 15.0, height: 1.5)),
+        );
+      }
+    }
+    return Column(
+      children: widget
     );
   }
 }
