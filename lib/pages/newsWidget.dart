@@ -18,7 +18,6 @@ class _NewsState extends State<News> {
   bool present;
   _NewsState(this.present);
   final NewsApiService apiService = NewsApiService();
-
   @override
   void initState() {
     super.initState();
@@ -30,40 +29,52 @@ class _NewsState extends State<News> {
       padding: EdgeInsets.all(10.0),
       child: Container(
         width: 100,
-        child: FutureBuilder(
-          future: present ? apiService.getAll(true) : apiService.getAll(false),
-          builder: (context, AsyncSnapshot<List<NewsList>> snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                  child: Column(children: [Icon(Icons.error, size: 120)]));
-            } else if (snapshot.connectionState == ConnectionState.done) {
-              List<NewsList> news = snapshot.data;
-              return ListView.builder(
-                  itemCount: news.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.scale,
-                              alignment: Alignment.bottomCenter,
-                              child: NewsDetailsScreen(
-                                  item: news[index],
-                                  tag: news[index].newsTitle),
-                            ));
-                      },
-                      child: listWidget(news[index]),
-                    );
-                  });
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
+        child: RefreshIndicator(
+          onRefresh: refreshList,
+          child: FutureBuilder(
+            future:
+                present ? apiService.getAll(true) : apiService.getAll(false),
+            builder: (context, AsyncSnapshot<List<NewsList>> snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                    child: Column(children: [Icon(Icons.error, size: 120)]));
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                List<NewsList> news = snapshot.data;
+                return ListView.builder(
+                    itemCount: news.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.scale,
+                                alignment: Alignment.bottomCenter,
+                                child: NewsDetailsScreen(
+                                    item: news[index],
+                                    tag: news[index].newsTitle),
+                              ));
+                        },
+                        child: listWidget(news[index]),
+                      );
+                    });
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          ),
         ),
       ),
     );
+  }
+
+  Future<Null> refreshList() async {
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      new News();
+    });
+    return null;
   }
 }
