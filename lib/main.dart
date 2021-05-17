@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
-import 'package:draggable_floating_button/draggable_floating_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:web_apk_news/pages/imageListWidget.dart';
@@ -107,22 +106,6 @@ class _HomePageState extends State<HomePage>
         JobOffers(),
         BillBoard(),
         LostFinding(),
-      ]),
-      floatingActionButton: Stack(children: [
-        Container(
-          alignment: Alignment.bottomRight,
-          child: DraggableFloatingActionButton(
-              backgroundColor: Colors.white,
-              child: new Icon(
-                Icons.refresh,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                setState(() {});
-              },
-              appContext: context,
-              appBar: getAppBar()),
-        ),
       ]),
     );
   }
