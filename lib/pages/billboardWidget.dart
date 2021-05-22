@@ -34,79 +34,78 @@ class _BillBoardState extends State<BillBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Container(
-            child: Column(
-          children: [
-            // See more: https://pub.dev/packages/weekday_selector
-            WeekdaySelector(
-                onChanged: (int day) {
-                  setState(() {
-                    values = List.filled(7, false, growable: false)
-                      ..[day == 7 ? 0 : day] = true;
-                    this.day = day;
-                  });
-                },
-                selectedFillColor: Colors.indigo,
-                values: values,
-                shortWeekdays: ["D", "L", "M", "M", "J", "V", "S"]),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(
-                child: Container(
-              child: FutureBuilder(
-                future: apiService.getAll(day),
-                builder: (context, AsyncSnapshot<List<BillBoards>> snapshot) {
-                  if (snapshot.hasError) {
-                    return Center(
-                        child:
-                            Column(children: [Icon(Icons.error, size: 120)]));
-                  } else if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.hasData) {
-                    List<BillBoards> billboards = snapshot.data;
-                    return Container(
-                      child: ListView.builder(
-                          itemCount: billboards.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Stack(children: [
-                                    ListTile(
-                                      leading: Text(billboards[index].hours),
-                                      title: Text(
-                                        billboards[index].title,
-                                        style: TextStyle(fontSize: 18.0),
-                                      ),
-                                      trailing: IconButton(
-                                          onPressed: () {
-                                            savePreference(billboards[index]);
-                                            setState(() {});
-                                          },
-                                          icon: obtainIcon(
-                                              context, billboards[index])),
-                                      subtitle: Text(
-                                        billboards[index].subtitle,
-                                        style: TextStyle(fontSize: 14.0),
-                                      ),
-                                    )
-                                  ])
-                                ],
-                              ),
-                            );
-                          }),
-                    );
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-            )),
-          ],
-        )));
+    return Container(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+      children: [
+        // See more: https://pub.dev/packages/weekday_selector
+        WeekdaySelector(
+            onChanged: (int day) {
+              setState(() {
+                values = List.filled(7, false, growable: false)
+                  ..[day == 7 ? 0 : day] = true;
+                this.day = day;
+              });
+            },
+            selectedFillColor: Colors.indigo,
+            values: values,
+            shortWeekdays: ["D", "L", "M", "M", "J", "V", "S"]),
+        SizedBox(
+          height: 10,
+        ),
+        Expanded(
+            child: Container(
+          child: FutureBuilder(
+            future: apiService.getAll(day),
+            builder: (context, AsyncSnapshot<List<BillBoards>> snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                    child:
+                        Column(children: [Icon(Icons.error, size: 120)]));
+              } else if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.hasData) {
+                List<BillBoards> billboards = snapshot.data;
+                return Container(
+                  child: ListView.builder(
+                      itemCount: billboards.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Stack(children: [
+                                ListTile(
+                                  leading: Text(billboards[index].hours),
+                                  title: Text(
+                                    billboards[index].title,
+                                    style: TextStyle(fontSize: 18.0),
+                                  ),
+                                  trailing: IconButton(
+                                      onPressed: () {
+                                        savePreference(billboards[index]);
+                                        setState(() {});
+                                      },
+                                      icon: obtainIcon(
+                                          context, billboards[index])),
+                                  subtitle: Text(
+                                    billboards[index].subtitle,
+                                    style: TextStyle(fontSize: 14.0),
+                                  ),
+                                )
+                              ])
+                            ],
+                          ),
+                        );
+                      }),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        )),
+      ],
+    ));
   }
 
   Future<void> savePreference(BillBoards billBoard) async {

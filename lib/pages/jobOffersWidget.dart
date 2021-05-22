@@ -20,8 +20,8 @@ class _JobOffersState extends State<JobOffers> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
+    return Container(
+      padding: const EdgeInsets.all(8.0),
       child: FutureBuilder(
           future: apiService.getAll(),
           builder: (context, AsyncSnapshot<List<JobOffer>> snapshot) {
